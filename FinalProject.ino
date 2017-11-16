@@ -23,9 +23,9 @@ void setup() {
 }
 
 void loop() {
-//  p1.process();
-//  p2.process();
-//  p3.process();
+  p1.process();
+  p2.process();
+  p3.process();
   p4.process();
 }
 
