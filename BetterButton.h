@@ -6,7 +6,7 @@
 class BetterButton
 {
   public:
-    BetterButton(int _buttonPin, int _buttonNum);
+    BetterButton(int _padPin, int _number);
     
     void process();
     void pressHandler(void (*f)(int));
@@ -14,11 +14,11 @@ class BetterButton
     void (*pressCallback)(int);
     void (*releaseCallback)(int);
 
-    int buttonNum;
-    int buttonPin;
-    bool firstCheck;
-    bool buttonState;
-    bool lastButtonState;
+    int padPin;
+    int padState;
+    int lastPadState;
+    int number;
+    boolean firstCheck;
     unsigned long lastCheck;
     int checkInt;
 

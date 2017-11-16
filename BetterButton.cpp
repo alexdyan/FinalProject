@@ -1,40 +1,37 @@
 #include "Arduino.h"
 #include "BetterButton.h"
 
-BetterButton::BetterButton(int _buttonPin, int _buttonNum) {
-  buttonPin = _buttonPin;
-  buttonNum = _buttonNum;
-  buttonState = 0;
-  lastButtonState = 0;
-
-  pinMode(buttonPin, INPUT);
-
+BetterButton::BetterButton(int _padPin, int _number) {
+  padPin = _padPin;
+  number = _number;
+  padState;
+  lastPadState;;
   lastCheck = 0;
   checkInt = 100;
+
+  pinMode(padPin, INPUT);
 }
 
 void BetterButton::process() {
-  if (millis() < lastCheck + checkInt)
+  if (millis() < lastCheck + checkInt)  //every 1/10 second
     return;
 
-  lastCheck = millis();
-
-  lastButtonState = buttonState;
-  buttonState = digitalRead(buttonPin);
-
-  if (lastButtonState == LOW && buttonState == HIGH) {
-    pressCallback(buttonNum);
+  lastPadState = padState;
+  padState = analogRead(padPin);
+  int thresh = 10;
+  if (lastPadState <= thresh && padState > thresh) {  //if you're hitting the sensor
+    pressCallback(number);
+    lastCheck = millis();
   }
-  if (lastButtonState == HIGH && buttonState == LOW) {
-    releaseCallback(buttonNum);
-  }
+  if (lastPadState > thresh && padState <= thresh)  //if you're not hitting it
+    releaseCallback(number);
 }
 
-void BetterButton::pressHandler(void (*f)(int)) {    //button down
+void BetterButton::pressHandler(void (*f)(int)) {    //sensor triggered
   pressCallback = *f;
 }
 
-void BetterButton::releaseHandler(void (*f)(int)) {  //button release
+void BetterButton::releaseHandler(void (*f)(int)) {  //sensor not triggered
   releaseCallback = *f;
 }
 

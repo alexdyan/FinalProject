@@ -23,17 +23,17 @@ void setup() {
 }
 
 void loop() {
-  p1.process();
-  p2.process();
-  p3.process();
+//  p1.process();
+//  p2.process();
+//  p3.process();
   p4.process();
 }
 
-void onPress(int buttonNum) {
+void onPress(int number) {
   Serial.write(0);
 }
 
-void onRelease(int buttonNum) {
+void onRelease(int number) {
   Serial.write(1);
 }
 
