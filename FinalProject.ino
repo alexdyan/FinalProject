@@ -1,14 +1,14 @@
-#include "BetterButton.h"
+#include "FinalProject.h"
 
 int pad1Pin = A17;
 int pad2Pin = A16;
 int pad3Pin = A15;
 int pad4Pin = A14;
 
-BetterButton p1 (pad1Pin, 0);
-BetterButton p2 (pad2Pin, 0);
-BetterButton p3 (pad3Pin, 0);
-BetterButton p4 (pad4Pin, 0);
+FinalProject p1 (pad1Pin, 0);
+FinalProject p2 (pad2Pin, 0);
+FinalProject p3 (pad3Pin, 0);
+FinalProject p4 (pad4Pin, 0);
 
 void setup() {
   Serial.begin(9600);
