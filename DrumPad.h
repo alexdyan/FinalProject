@@ -3,10 +3,10 @@
 
 #include "Arduino.h"
 
-class FinalProject
+class DrumPad
 {
   public:
-    FinalProject(int _padPin, int _number);
+    DrumPad(int _padPin, int _number);
     
     void process();
     void pressHandler(void (*f)(int));

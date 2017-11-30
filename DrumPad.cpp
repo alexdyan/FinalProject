@@ -1,7 +1,7 @@
 #include "Arduino.h"
-#include "FinalProject.h"
+#include "DrumPad.h"
 
-FinalProject::FinalProject(int _padPin, int _number) {
+DrumPad::DrumPad(int _padPin, int _number) {
   padPin = _padPin;
   number = _number;
   padState;
@@ -12,7 +12,7 @@ FinalProject::FinalProject(int _padPin, int _number) {
   pinMode(padPin, INPUT);
 }
 
-void FinalProject::process() {
+void DrumPad::process() {
   if (millis() < lastCheck + checkInt)  //every 1/10 second
     return;
 
@@ -27,11 +27,11 @@ void FinalProject::process() {
     releaseCallback(number);
 }
 
-void FinalProject::pressHandler(void (*f)(int)) {    //sensor triggered
+void DrumPad::pressHandler(void (*f)(int)) {    //sensor triggered
   pressCallback = *f;
 }
 
-void FinalProject::releaseHandler(void (*f)(int)) {  //sensor not triggered
+void DrumPad::releaseHandler(void (*f)(int)) {  //sensor not triggered
   releaseCallback = *f;
 }
 
