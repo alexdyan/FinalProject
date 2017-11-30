@@ -1,9 +1,10 @@
 #include "Arduino.h"
 #include "DrumPad.h"
 
-DrumPad::DrumPad(int _padPin, int _number) {
+DrumPad::DrumPad(int _padPin, int _number, int _val) {
   padPin = _padPin;
   number = _number;
+  val = _val;
   padState;
   lastPadState;
   lastCheck = 0;
@@ -20,14 +21,14 @@ void DrumPad::process() {
   padState = analogRead(padPin);
   int thresh = 10;
   if (lastPadState <= thresh && padState > thresh) {  //if you're hitting the sensor
-    pressCallback(number);
+    pressCallback(number, val);
     lastCheck = millis();
   }
   if (lastPadState > thresh && padState <= thresh)  //if you're not hitting it
     releaseCallback(number);
 }
 
-void DrumPad::pressHandler(void (*f)(int)) {    //sensor triggered
+void DrumPad::pressHandler(void (*f)(int, int)) {    //sensor triggered
   pressCallback = *f;
 }
 

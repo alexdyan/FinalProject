@@ -5,10 +5,10 @@ int pad2Pin = A16;
 int pad3Pin = A15;
 int pad4Pin = A14;
 
-DrumPad p1 (pad1Pin, 60); //kick
-DrumPad p2 (pad2Pin, 62); //hi hat
-DrumPad p3 (pad3Pin, 64); //crash
-DrumPad p4 (pad4Pin, 59); //snare
+DrumPad p1 (pad1Pin, 60, 1); //kick
+DrumPad p2 (pad2Pin, 62, 2); //hi hat
+DrumPad p3 (pad3Pin, 64, 3); //crash
+DrumPad p4 (pad4Pin, 59, 4); //snare
 
 void setup() {
   Serial.begin(9600);
@@ -29,14 +29,13 @@ void loop() {
   p4.process();
 }
 
-void onPress(int number) {
-  Serial.println(number);
-  Serial.write(0);
+void onPress(int number, int val) {
+  Serial.write(val);
   usbMIDI.sendNoteOn(number, 127, 1);
 }
 
 void onRelease(int number) {
-  Serial.write(1);
+  Serial.write(0);
   usbMIDI.sendNoteOff(number, 0, 1);
 }
 
